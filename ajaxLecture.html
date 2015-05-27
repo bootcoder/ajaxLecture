@@ -147,12 +147,29 @@ class: center, middle, inverse
     var request = $.ajax({
       url: '/posts',
       type: 'GET',
-
+      data: {someKey: "someValue"}
     })
-
-    $.get("ajax_info.txt", function(result) {
-     $("#myDiv").html(result);
+---
+## [building on that](http://api.jquery.com/category/ajax/)
+    var request = $.ajax({
+      url: '/posts',
+      type: 'GET',
+      data: {someKey: "someValue"}
     });
+
+    request.done(function(response){
+      console.log("YAY!!!");
+      console.log(response);
+
+      doSomeDomStuff(response);
+
+    });
+
+    request.fail(function(response){
+      console.log("Ohh Nooooooos");
+      console.log(response);
+    });
+
 ---
 class: center, middle, inverse
 
