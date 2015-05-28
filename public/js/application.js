@@ -2,45 +2,39 @@ $(document).ready(function() {
 
   console.log("page loaded!");
 
-  // seedButtonListener();
+  createUserListener();
   gifButtonListener();
 
 });
 
 
-// var seedButtonListener = function() {
+var createUserListener = function() {
+  $('#createUser').on('click', function (event){
+    event.preventDefault();
 
-//   $('#seedBTN').on('click', function(){
+    var request = $.ajax({
+      url: "/users",
+      type: "POST",
+      data: { "username": "TimTomToeBob" }
+    })
 
-//     var allImgs = $('.gif_img');
-//     var dataToSend = []
-//     var arrayLength = allImgs.length
+    request.done(function(response){
 
-//     for(var i = 0; i < arrayLength; i += 1) {
-//       dataToSend.push(allImgs[i].src)
-//     }
+      console.log(response);
+      console.log(arguments);
 
-//     // console.log(dataToSend)
+      console.log('YAYAYAYAYA');
+      $('body').append('<h1>I made a new ' + response.username + '</h1>');
+    })
 
-//     var request = $.ajax({
-//       type: 'POST',
-//       url: '/pictures',
-//       data: {'imgs': JSON.stringify(dataToSend)}
-//     })
+    request.fail(function(response){
+      console.log(response);
+      console.log(arguments);
+      console.log('FAILLLLL');
+    })
 
-//     request.done(function(response){
-//       console.log(response);
-//       console.log('There and back again...Yay!')
-//     });
-
-
-//     request.fail(function(response){
-//       console.log(response);
-//       console.log('I have failed at all the things...')
-//     });
-
-//   })
-// }
+  })
+};
 
 
 var gifButtonListener = function() {
